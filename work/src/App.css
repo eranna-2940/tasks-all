@@ -1,0 +1,84 @@
+html, body {
+    min-height: 100%;
+}
+body { background-color: dodgerblue; }
+
+.navbar-brand{
+    font-size: 45px;
+    font-weight: 600;
+    margin-left: 110px;
+}
+.navbar-nav{
+    margin-left: 10rem;
+    padding-top: 2rem;
+}
+.navbar-nav li{
+    margin-right: 10px;
+    font-size: 20px;
+}
+.navbar-nav li:hover{
+    background-color: #035683;
+    border-radius: 5px;
+}
+.navbar-nav  li:is(:active).active{
+    background-color: red;
+}
+
+.navbar-email-list{
+  display: flex;
+  justify-content: end;
+}
+.navbar-email-list li{
+  color: white;
+  padding-right: 2rem;
+  font-size: 20px;
+  list-style: none;
+}
+#homeimage{
+    width: 100%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.image{
+    position: relative;
+    text-align: center;
+    color: rgb(34, 31, 31);
+  
+}
+.imgtxt{
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.homeinfo{
+    display: grid;
+    grid-template-columns: 4fr 4fr 4fr;
+    justify-content: center;
+    padding: 20px 150px 20px 150px;
+}
+.minhome{
+    padding-left: 15px;
+}
+.minhome h4{
+    color: white;
+    font-weight: 500;
+}
+.minhome p{
+    color: white;
+}
+.homefooter{
+    background-color: black;
+    height: 30px;
+   
+}
+.homefooter p{
+    text-align: center;
+    font-size: 16px;
+    padding-top: 7px;
+    color: #7d7c7c;
+    line-height: 10px;
+}

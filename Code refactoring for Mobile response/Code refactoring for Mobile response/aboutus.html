@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About Us - Your Web Application</title>
+    <style>
+        /* Reset default margin and padding */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            overflow: auto; /* Hide vertical scrollbar */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 1rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .about {
+            display: flex;
+            flex-direction: row; /* Change to column on small screens */
+            padding: 2rem;
+            background-color: #f4f4f4;
+        }
+
+        .about h1 {
+            margin: 0;
+            font-size: 1.5rem; /* Adjust font size */
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .about h1:last-child {
+            color: red;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .about-text {
+            text-align: center;
+        }
+
+        .bold-center {
+            font-weight: bold;
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0; /* Adjust padding */
+        }
+
+        .team h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .team-member {
+            margin: 1rem;
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .team-member img {
+            max-width: 100%; /* Adjust image size */
+            height: auto;
+            border-radius: 50%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: #fff;
+        }
+           
+
+        /* Media queries for responsiveness */
+       
+        @media all and (max-width:480px){
+            .about{
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+            .about-image{
+                text-align: center;
+            }
+            .team {
+            display: flex;
+            flex-direction: column;
+        }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a>About Us</a></li>
+                <li><a href="/dashboard">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="about">
+        <div class="about-content">
+            <h1 style="color: red;">Infomerica</h1>
+            <div class="about-text">
+                <p class="bold-center">We strive for your business growth through innovative approaches.</p><br>
+                <p class="bold-center">Infomerica is a Software Development and Systems Integration company, one of
+                    the fastest growing companies that is committed to help our customers grow and move forward in
+                    every aspect of their business.</p>
+            </div>
+        </div>
+        <div class="about-image">
+            <img src="https://image3.mouthshut.com/images/imagesp/926028931s.jpg" alt="About Us">
+        </div>
+    </section>
+    <section class="team">
+        <h2>OUR SERVICES</h2>
+        <div class="team-member">
+            <h3>QA Services</h3>
+            <img src="https://images.ctfassets.net/3viuren4us1n/7K9DDidhIWIF6OaIvL3m8u/c80eaefd6f8eb2a498c265aa9407f7ec/QA_testing_-_resized.jpg"
+                alt="Team Member 1">
+        </div>
+        <div class="team-member">
+            <h3>Maintenance</h3>
+            <img src="https://smartym.pro/wp-content/uploads/2020/05/Types-of-Software-Maintenance-MAIN@2x-1.jpg"
+                alt="Team Member 2">
+        </div>
+        <div class="team-member">
+            <h3>Development</h3>
+            <img src="https://tse4.mm.bing.net/th?id=OIP.KOzldFcKFANHFvq6meHpLAHaF7&pid=Api&P=0&h=180"
+                alt="Team Member 2">
+        </div>
+    </section>
+    <!-- Your content goes here -->
+    <footer>
+        <p>&copy; 2023 Visito App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

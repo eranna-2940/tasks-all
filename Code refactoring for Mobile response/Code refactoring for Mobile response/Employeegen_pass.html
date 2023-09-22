@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+
+<head>
+	<title>Visitor Details</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<style>
+		/* Your custom CSS styles */
+		.card {
+			width: 40%;
+			margin: 25px auto;
+			padding: 5px 5px 15px 5px;
+			border-radius: 5px;
+			box-shadow: 00px 0px 5px #888888;
+		    height: auto;
+			overflow-y: auto;
+			background-color: #336699;
+			color: white;
+		}
+
+		.card-header {
+			text-align: center;
+			background-color: white;
+			color: black;
+			padding: 10px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		.visitor-photo {
+			width: 70px;
+			height: 70px;
+			object-fit: cover;
+			border-radius: 70%;
+			margin: 0 auto;
+			display: block;
+			margin-top: -20px;
+			margin-bottom: 5px;
+		}
+
+		.visitor-info {
+			padding: 15px;
+			text-align: center;
+		}
+
+		.visitor-info p {
+			margin-bottom: 2px;
+			text-align: left;
+		}
+
+		.field-box {
+			border: 1px solid #fff;
+			padding: 3px;
+			border-radius: 5px;
+			margin-bottom: 5px;
+			text-align: center;
+			background-color: #fff;
+			height: 45px;
+
+			font-weight: bold;
+		}
+
+		.field-box p {
+			margin: 0;
+			padding: 1px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.field-name {
+			margin-bottom: 2px;
+			text-align: left;
+			font-weight: bold;
+			font-size: 11px;
+			color: black;
+			margin-top: 10px;
+			font-weight: bold;
+			/* Label color in black */
+		}
+
+		.field-value {
+			color: blue;
+		}
+
+		.row-fields {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.field-box-half {
+			flex: 0 0 calc(50% - 5px);
+			margin-bottom: 5px;
+		}
+
+		.field-box-remarks {
+			flex: 0 0 100%;
+			margin-bottom: 2px;
+		}
+
+		.remarks-box {
+			border: 1px solid #fff;
+			padding: 3px;
+			border-radius: 5px;
+			background-color: #fff;
+			max-height: 40%;
+			font-weight: bold;
+		}
+
+		.remarks-label {
+			margin-bottom: 2px;
+			text-align: left;
+			font-weight: bold;
+			font-size: 11px;
+			color: black;
+			/* Label color in black */
+		}
+
+		.small-button {
+			padding: 3px 8px;
+			font-size: 10px;
+			width: 60px;
+			font-weight: bold;
+			margin-right: 10px;
+		}
+
+		.btn-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 10px;
+		}
+
+		.email-button {
+			padding: 10px 20px;
+			background-color: #497bbf;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 14px;
+		}
+
+		.logo {
+			text-align: center;
+			margin-top: -5%;
+		}
+
+		.logo img {
+			width: 40%;
+			height: 110%;
+			object-fit: contain;
+		}
+
+		.image-container {
+			text-align: center;
+		}
+
+		.image-link img {
+			width: 15px;
+			height: 15px;
+			object-fit: contain;
+		}
+
+		.click-here {
+			font-weight: bold;
+		}
+
+		.location-qr {
+			margin-left: 5px;
+		}
+
+		.thank-you {
+			font-weight: bold;
+			color: black;
+			text-align: center;
+			margin-top: 10px;
+		}
+		.submit-button{
+			text-align: center;
+		}
+		@media (max-width: 480px) {
+      /* Small devices (portrait tablets and phones) */
+      .card {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 20px;
+      }
+    }
+		@media (max-width: 900px) {
+			/* Small devices (portrait tablets and large phones) */
+			.card {
+				width: 100%;
+			}
+			}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="logo">
+				<img src="https://www.itbits.co/wp-content/uploads/2021/03/1816.jpg" alt="Logo">
+			</div>
+			<div class="card-header">
+				<h3>VISITING PASS</h3>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12 visitor-info">
+						<img th:src="'data:image/png;base64,' + ${visitor.base64Image}" alt="Visitor Photo"
+							class="visitor-photo">
+							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Accept.svg/1024px-Accept.svg.png"
+							alt="Visitor Photo" style="width: 12%;">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="field-box">
+							<p class="field-name"><strong>EmployeeId :</strong> <span class="field-value"
+									th:text="${visitor.EMployeeId}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Visitor Name:</strong> <span class="field-value"
+									th:text="${visitor.firstName} + ' ' + ${visitor.lastName}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Visitor Email:</strong> <span class="field-value"
+									th:text="${visitor.email}"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row-fields">
+					<div class="field-box-half">
+						<div class="field-box">
+							<p class="field-name"><strong>Visitor Mobile:</strong> <span class="field-value"
+									th:text="${visitor.mobileNumber}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Branch:</strong> <span class="field-value"
+									th:text="${visitor.visitingBranch}"></span></p>
+						</div>
+					</div>
+					<div class="field-box-half">
+						<div class="field-box">
+							<p class="field-name"><strong>DOB:</strong> <span class="field-value"
+									th:text="${visitor.dateofbirth}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Purpose:</strong> <span class="field-value"
+									th:text="${visitor.purpose}"></span></p>
+						</div>
+
+					</div>
+					<div class="field-box-remarks">
+						<div class="field-box">
+							<p class="field-name"><strong>Whome To Meet:</strong> <span class="field-value"
+									th:text="${visitor.whomToMeet}"></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="field-box-remarks">
+					<div class="field-box">
+						<p class="field-name"><strong>Remarks:</strong> <span class="field-value"
+								th:text="${visitor.remarks}"></span></p>
+					</div>
+				</div>
+			</div>
+			<div class="image-container">
+				<div class="image-link">
+					<span class="click-here">click here</span> <span class="location-qr">to get the Location QR</span>
+					<a th:if="${visitor.visitingBranch == 'Hyd-HitechCity'}"
+						href="https://qr-codes-svg.s3.amazonaws.com/Qj8yCc.svg?1692386823705">
+						<img src="https://logodix.com/logo/37864.png" alt="Image">
+					</a>
+					<a th:if="${visitor.visitingBranch == 'Hyd-Punjagutta'}"
+						href="https://qr-codes-svg.s3.amazonaws.com/eXIyUA.svg?1692386762172">
+						<img src="https://logodix.com/logo/37864.png" alt="Image">
+					</a>
+					<a th:if="${visitor.visitingBranch == 'Banglore'}"
+						href="https://qr-codes-svg.s3.amazonaws.com/9wHynl.svg?1692386762172">
+						<img src="https://logodix.com/logo/37864.png" alt="Image">
+					</a>
+				</div>
+			</div>
+			<div style="font-weight: bold; color: black;" class="thank-you">Thank you for visiting Infomerica Visito
+				APP.
+			</div>
+			<div class="submit-button">
+				<button id="sendEmailButton" class="btn btn-danger mt-3">Send Email</button>
+				<script th:inline="javascript">
+					/*<![CDATA[*/
+					document.getElementById("sendEmailButton").addEventListener("click", async () => {
+						try {
+							const visitorStatus = /*[[${visitor.status}]]*/ ""; // Actual status value
+							const visitorEmail = /*[[${visitor.email}]]*/ ""; // Actual email value
+							const response = await fetch(`/send-email?status=${visitorStatus}&email=${visitorEmail}`, {method: "GET"});
+							const result = await response.text();
+							alert(result);
+						} catch (error) {
+							console.error(error);
+							alert("Error sending email");
+						}
+					});
+                    /*]]>*/
+				</script>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

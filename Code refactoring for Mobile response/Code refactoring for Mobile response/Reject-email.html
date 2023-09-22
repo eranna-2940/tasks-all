@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rejected Visiting Request</title>
+    <style>
+        /* Your custom CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .title-divider {
+            width: 100%;
+            border-top: 1px dotted #ccc;
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10%; /* Move the list down by 20% */
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .photo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .photo img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .small-image {
+            position: absolute;
+            top: 40%;
+            right: 50%; /* Keep the image in the same position */
+            transform: translate(50%, -50%);
+        }
+
+        .small-image img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .card-header {
+            position: relative;
+        }
+
+        .thank-you {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        	.pass-photo {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.pass-photo img {
+			max-width: 100px;
+			/* Adjust the width as needed */
+			max-height: 100px;
+			/* Adjust the height as needed */
+		}
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="logo">
+            <img src="https://image3.mouthshut.com/images/imagesp/926028931s.jpg" alt="Logo">
+        </div>
+        <div class="title">Rejected Visiting Request</div>
+        <div class="title-divider"></div> <!-- Dotted line divider -->
+        <div class="pass-photo">
+			<img src="https://icon-library.com/images/reject-icon/reject-icon-16.jpg"
+				alt="Visitor Photo">
+		</div>
+        <ul>
+            <li><span style="font-weight: bold; color: black;">Name:</span> <span
+                    style="font-weight: bold; color: blue;" th:text="${visitor.firstName}"></span> <span
+                    style="font-weight: bold; color: blue;" th:text="${visitor.lastName}"></span></li>
+            <li><span style="font-weight: bold; color: black;">Rejected Date:</span> <span
+                    style="font-weight: bold; color: blue;"
+                    th:text="${#dates.format(visitor.visitDate, 'yyyy-MM-dd')}"></span></li>
+            <li><span style="font-weight: bold; color: black;">Purpose:</span> <span
+                    style="font-weight: bold; color: blue;" th:text="${visitor.purpose}"></span></li>
+            <li><span style="font-weight: bold; color: black;">Visiting Branch:</span> <span
+                    style="font-weight: bold; color: blue;" th:text="${visitor.visitingBranch}"></span></li>
+            <li><span style="font-weight: bold; color: black;">Reason for Rejection:</span> <span
+                    style="font-weight: bold; color: blue;" th:text="${visitor.remarks}"></span></li>
+        </ul>
+        <div class="thank-you" style="font-weight: bold; color: black;">Thank you for visiting.</div>
+    </div>
+</body>
+
+</html>

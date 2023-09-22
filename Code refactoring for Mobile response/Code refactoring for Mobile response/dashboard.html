@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Software Company Monitoring Dashboard</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.29.0/dist/apexcharts.css">
+	<style>
+		 body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+		 .sidebar {
+            background-color: #333;
+            color: #fff;
+            min-height: 100vh; 
+        }
+		.sidebar-item {
+			padding: 10px 20px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		.sidebar-item:hover {
+			background-color: #444;
+		}
+
+		.dashboard-content {
+			padding: 20px;
+		}
+
+		.card {
+			border-radius: 15px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.chart-container {
+			height: 300px;
+		}
+.sidebar-item a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidebar-item a:hover {
+    color: #ccc;
+}
+
+		h2 {
+			color: #333;
+		}
+
+		.card-header {
+			background-color: #fff;
+			border-bottom: none;
+			font-weight: bold;
+		}
+
+		.card-body {
+			padding: 20px;
+		}
+		@media (max-width: 768px) {
+            /* Small devices (portrait tablets and phones) */
+            .sidebar {
+                min-height: auto;
+            }
+        }
+	</style>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+		 <nav class="col-md-2 sidebar">
+				<h4 class="mt-3 mb-4 text-center">Dashboard</h4>
+				<div class="sidebar-item visitors">
+					<a href="/logout">Log out</a>
+				</div>
+				<div class="sidebar-item visitors" href="#" onclick="handleAboutUsClick()">About Us</div>
+				<div class="sidebar-item visitors" href="#" onclick="handleVisitorsClick()">Visitors</div>
+				<div class="sidebar-item">Settings</div>
+			</nav>
+			<main class="col-md-10 dashboard-content">
+				<h2 class="mb-4">Infomerica Dashboard</h2>
+				<div class="row">
+					<div class="col-md-6 mb-4">
+						<div class="card" id="total-projects-card">
+							<div class="card-header">
+								Today's Visitors
+							</div>
+							<div class="card-body">
+								<h2 class="text-center" id="visitor-count">Loading...</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-4">
+						<div class="card" id="total-projects1-card">
+							<div class="card-header">
+								Total Visitors
+							</div>
+							<div class="card-body">
+								<h2 class="text-center" id="visitor-count">Loading...</h2>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 mb-4">
+						<div class="card">
+							<div class="card-header">
+								Total Employees
+							</div>
+							<div class="card-body">
+								<h2 class="text-center">120</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-6 mb-4">
+						<div class="card">
+							<div class="card-header">
+								Branch Locations
+							</div>
+							<div class="card-body text-center">
+								<div
+									style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+									<div style="margin-right: 10px;">
+										<a href="https://www.google.com/maps/place/Gowra+FountainHead/@17.4437971,78.3805477,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb93e01511d911:0x104e7368bcfb0af1!8m2!3d17.443792!4d78.3831226!16s%2Fg%2F11f3rxzhkr?entry=ttu"
+											target="_blank">
+											<img src="https://tse4.mm.bing.net/th?id=OIP.HQS0zsjB-88GMDvBoQtoYgHaHa&pid=Api&P=0&h=180"
+												alt="Location 1" style="width: 20px;">
+										</a>
+										<p style="margin: 10px 0;">Hyd-1</p>
+									</div>
+									<div style="margin-right: 10px;">
+										<a href="https://www.google.com/maps/place/Infomerica/@17.426976,78.4458613,17z/data=!3m2!4b1!5s0x3bcb90cb3e8fc24b:0x7d8ed76db80fa9d6!4m6!3m5!1s0x3bcb90cb3ed4ebf1:0xcb882959b133e303!8m2!3d17.4269709!4d78.4484362!16s%2Fg%2F11jzxj2bv1?entry=ttu"
+											target="_blank">
+											<img src="https://tse4.mm.bing.net/th?id=OIP.HQS0zsjB-88GMDvBoQtoYgHaHa&pid=Api&P=0&h=180"
+												alt="Location 2" style="width: 20px;">
+										</a>
+										<p style="margin: 10px 0;">Hyd_2</p>
+									</div>
+									<div>
+										<a href="https://www.google.co.in/maps/dir//2nd+Floor,+Infomerica,+Sai+Arcade,+Outer+Ring+Rd,+Devarabisanahalli,+BTM+Layout,+Bengaluru,+Karnataka+560103/@12.930131,77.6816368,17z/data=!3m1!5s0x3bae13a12c8e565f:0xba3c02fee285d68d!4m18!1m8!3m7!1s0x3bae13a6edcae3cd:0x65175dde337b8eb4!2sInfomerica!8m2!3d12.9302402!4d77.6842195!15sCiwybmQgRmxvb3IsIFNhaSBBcmNhZGUgQmVuZ2FsdXJ1IEluZGlhIDU2MDEwM1otIisybmQgZmxvb3Igc2FpIGFyY2FkZSBiZW5nYWx1cnUgaW5kaWEgNTYwMTAzkgEQc29mdHdhcmVfY29tcGFueZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VOWGVtVTNNbEJSRUFF4AEA!16s%2Fg%2F11sby1t5zd!4m8!1m0!1m5!1m1!1s0x3bae13a6edcae3cd:0x65175dde337b8eb4!2m2!1d77.6842195!2d12.9302402!3e3?entry=ttu"
+											target="_blank">
+											<img src="https://tse4.mm.bing.net/th?id=OIP.HQS0zsjB-88GMDvBoQtoYgHaHa&pid=Api&P=0&h=180"
+												alt="Location 3" style="width: 20px;">
+										</a>
+										<p style="margin: 10px 0;">Bangalore</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="row">
+			<div class="col-md-6 mb-4">
+						<div class="card">
+							<div class="card-header">
+								Employee Distribution
+							</div>
+							<div class="card-body chart-container">
+								<div id="employee-distribution-chart"></div>
+							</div>
+						</div>
+					</div>
+			
+				</div>
+		</div>
+		</main>
+	</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.29.0/dist/apexcharts.min.js"></script>
+	<script>
+		// Sample data for charts
+		const revenueData = {
+			series: [{
+				name: 'Revenue',
+				data: [120000, 150000, 180000, 220000, 260000, 300000, 350000]
+			}],
+			xaxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
+			}
+		};
+
+		const userActivityData = {
+			series: [{
+				name: 'Active Users',
+				data: [100, 150, 200, 250, 300, 350, 400]
+			}],
+			xaxis: {
+				categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+			}
+		};
+
+		const employeeDistributionData = {
+			series: [30, 25, 20, 15, 10],
+			labels: ['Developers', 'Designers', 'QA', 'Managers', 'Others']
+		};
+
+		// Initialize charts
+		new ApexCharts(document.querySelector("#revenue-chart"), {
+			...revenueData,
+			chart: {
+				type: 'line',
+				height: 300,
+				toolbar: {
+					show: false
+				}
+			}
+		}).render();
+
+		new ApexCharts(document.querySelector("#user-activity-chart"), {
+			...userActivityData,
+			chart: {
+				type: 'bar',
+				height: 300,
+				toolbar: {
+					show: false
+				}
+			}
+		}).render();
+
+		new ApexCharts(document.querySelector("#employee-distribution-chart"), {
+			series: employeeDistributionData.series,
+			chart: {
+				type: 'donut',
+				height: 300
+			},
+			labels: employeeDistributionData.labels,
+			legend: {
+				show: true,
+				position: 'bottom'
+			}
+		}).render();
+		function handleVisitorsClick() {
+    window.location.href = '/getvisitors'; // Change to the appropriate URL
+}
+		function handleAboutUsClick() {
+			window.location.href = "/aboutus";
+		}
+		async function updateVisitorCount() {
+			try {
+				// Make an API request to get the visitor count for one day
+				const response = await fetch('/visitorsbyDate');
+				const data = await response.json();
+
+				// Update the "Total Projects" card with the visitor count
+				const totalProjectsCard = document.getElementById('total-projects-card');
+				if (totalProjectsCard) {
+					totalProjectsCard.querySelector('.card-body h2').textContent = data;
+				}
+			} catch (error) {
+				console.error('Error fetching visitor count:', error);
+			}
+		}
+
+		// Call the updateVisitorCount function to fetch and update the visitor count
+		updateVisitorCount();
+		async function updateVisitorCount1() {
+			try {
+				// Make an API request to get the visitor count for one day
+				const response = await fetch('/allvisitors');
+				const data = await response.json();
+
+				// Update the "Total Projects" card with the visitor count
+				const totalProjectsCard = document.getElementById('total-projects1-card');
+				if (totalProjectsCard) {
+					totalProjectsCard.querySelector('.card-body h2').textContent = data;
+				}
+			} catch (error) {
+				console.error('Error fetching visitor count:', error);
+			}
+		}
+
+		// Call the updateVisitorCount function to fetch and update the visitor count
+		updateVisitorCount1();
+
+
+	</script>
+</body>
+
+</html>

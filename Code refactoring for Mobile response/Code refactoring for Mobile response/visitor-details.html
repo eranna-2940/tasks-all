@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Visitor Details</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Your custom CSS styles */
+		.card {
+			width: 35%;
+			margin: 0 auto;
+			margin-top: 60px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 5px #888888;
+			max-height: 100%;
+			overflow-y: auto;
+			background-color: #a366ff;
+			color: white;
+		}
+
+		@media (max-width: 900px) {
+
+			/* Small devices (portrait tablets and large phones) */
+			.card {
+				width: 100%;
+			}
+		}
+
+		.card-header {
+			text-align: center;
+			background-color: white;
+			color: black;
+			padding: 10px;
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+		}
+
+		.visitor-photo {
+			width: 60px;
+			height: 60px;
+			object-fit: cover;
+			border-radius: 50%;
+			margin: 0 auto;
+			display: block;
+			margin-top: -20px;
+			margin-bottom: 10px;
+		}
+
+		.visitor-info {
+			padding: 10px;
+		}
+
+		.visitor-info p {
+			margin-bottom: 5px;
+			text-align: left;
+		}
+
+		.field-box {
+			border: 1px solid #fff;
+			padding: 3px;
+			border-radius: 5px;
+			margin-bottom: 5px;
+			text-align: center;
+			background-color: #fff;
+			height: 40px;
+			font-weight: bold;
+		}
+
+		.field-box p {
+			margin: 0;
+			padding: 1px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.field-name {
+			margin-bottom: 2px;
+			text-align: left;
+			font-weight: bold;
+			font-size: 11px;
+			color: black;
+			margin-top: 10px;
+			font-weight: bold;
+			/* Label color in black */
+		}
+
+		.field-value {
+			color: blue;
+		}
+
+		.row-fields {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.field-box-half {
+			flex: 0 0 calc(50% - 5px);
+			margin-bottom: 5px;
+		}
+
+		.field-box-remarks {
+			flex: 0 0 100%;
+			margin-bottom: 2px;
+		}
+
+		.remarks-box {
+			border: 1px solid #fff;
+			padding: 3px;
+			border-radius: 5px;
+			background-color: #fff;
+			max-height: 40%;
+			font-weight: bold;
+		}
+
+		.remarks-label {
+			margin-bottom: 2px;
+			text-align: left;
+			font-weight: bold;
+			font-size: 11px;
+			color: black;
+			/* Label color in black */
+		}
+
+		.small-button {
+			padding: 3px 8px;
+			font-size: 10px;
+			width: 60px;
+			font-weight: bold;
+			margin-right: 10px;
+		}
+
+		.btn-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 10px;
+		}
+
+		.btn-accept,
+		.btn-reject {
+			background-color: transparent;
+			color: black;
+			border: 1px solid white;
+			padding: 3px 8px;
+			font-size: 10px;
+			font-weight: bold;
+		}
+
+		.btn-accept:hover,
+		.btn-reject:hover {
+			background-color: white;
+			/* Change background color on hover */
+			color: blue;
+			/* Change text color on hover */
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h3>VISITOR DETAILS</h3>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12 visitor-info">
+						<img th:src="'data:image/png;base64,' + ${visitor.base64Image}" alt="Visitor Photo"
+							class="visitor-photo">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+
+						<div class="field-box">
+							<p class="field-name"><strong>Name:</strong> <span class="field-value"
+									th:text="${visitor.firstName} + ' ' + ${visitor.lastName}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Email:</strong> <span class="field-value"
+									th:text="${visitor.email}"></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="row-fields">
+					<div class="field-box-half">
+						<div class="field-box">
+							<p class="field-name"><strong>Mobile:</strong> <span class="field-value"
+									th:text="${visitor.mobileNumber}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Branch:</strong> <span class="field-value"
+									th:text="${visitor.visitingBranch}"></span></p>
+						</div>
+					</div>
+					<div class="field-box-half">
+						<div class="field-box">
+							<p class="field-name"><strong>DOB:</strong> <span class="field-value"
+									th:text="${visitor.dateofbirth}"></span></p>
+						</div>
+						<div class="field-box">
+							<p class="field-name"><strong>Purpose:</strong> <span class="field-value"
+									th:text="${visitor.purpose}"></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="field-box-remarks">
+					<div class="field-box">
+						<p class="field-name"><strong>Remarks:</strong> <span class="field-value"
+								th:text="${visitor.remarks}"></span></p>
+					</div>
+				</div>
+			</div>
+			<div class="btn-container">
+				<div class="field-box" style="margin-right: 100px; margin-right: 10%;">
+					<!-- Added margin to create space between buttons -->
+					<form th:action="@{/acceptVisitor}" method="post" id="acceptForm">
+						<input type="hidden" name="id" th:value="${visitor.id}" />
+						<button type="button" class="btn btn-accept small-button" id="acceptButton"
+							onclick="disableButton('acceptButton', 'Accepted')">Accept</button>
+					</form>
+				</div>
+				<div class="field-box">
+					<form th:action="@{/rejectVisitor}" method="post" id="rejectForm">
+						<input type="hidden" name="id" th:value="${visitor.id}" />
+						<button type="button" class="btn btn-reject small-button" id="rejectButton"
+							onclick="disableButton('rejectButton', 'Rejected')">Reject</button>
+					</form>
+				</div>
+			</div>
+
+			<p id="statusMessage" class="text-center"></p>
+		</div>
+	</div>
+
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		function disableButton(buttonId, status) {
+			var button = document.getElementById(buttonId);
+			var formId = buttonId === 'acceptButton' ? 'acceptForm' : 'rejectForm';
+			var statusMessage = document.getElementById('statusMessage');
+
+			if (!button.disabled) {
+				button.disabled = true;
+				button.innerHTML = 'Submitting...';
+
+				// Prevent further interactions with the button
+				document.getElementById(formId).submit();
+				button.removeEventListener('click', handleClick);
+
+				if (statusMessage) {
+					statusMessage.innerText = 'You have successfully ' + status.toLowerCase() + '.';
+				}
+			} else {
+				alert('You have already submitted your response.');
+			}
+		}
+
+		function handleClick(event) {
+			var buttonId = event.target.id;
+			var status = buttonId === 'acceptButton' ? 'Accepted' : 'Rejected';
+			disableButton(buttonId, status);
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			var acceptButton = document.getElementById('acceptButton');
+			var rejectButton = document.getElementById('rejectButton');
+
+			acceptButton.addEventListener('click', handleClick);
+			rejectButton.addEventListener('click', handleClick);
+		});
+        /*]]>*/
+	</script>
+</body>
+
+</html>

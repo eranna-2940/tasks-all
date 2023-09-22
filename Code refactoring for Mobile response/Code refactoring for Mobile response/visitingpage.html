@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Visitor Details</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			background: linear-gradient(to right, #05053d 50%, #ffffff 50%);
+		}
+
+		.card-container {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.card {
+			border: 1px solid #ccc;
+			padding: 20px;
+			width: 500px;
+			height: 600px;
+			border-radius: 10px;
+			background-color: #ffffff;
+			color: white;
+			box-shadow: 0px 0px 5px #888888;
+			/* margin-bottom: 5%; */
+		}
+
+		.card-image {
+			width: 700px;
+			height: auto;
+			position: relative;
+			right: 50px;
+			bottom: 100px;
+		}
+
+		.input-field {
+			padding: 5px;
+			margin-bottom: 15px;
+			background-color: #497bbf;
+			color: white;
+			border-radius: 8px;
+		}
+
+		.input-field::placeholder {
+			color: white;
+		}
+
+		.narrow-field,
+		.small-field {
+			width: 220px;
+		}
+
+		.wide-field {
+			width: 460px;
+		}
+
+		.tall-field {
+			height: 120px;
+		}
+
+		.textarea-field {
+			width: 460px;
+			padding: 5px;
+			height: 85px;
+			margin-bottom: 15px;
+			background-color: #497bbf;
+			color: white;
+			border-radius: 8px;
+		}
+
+		.textarea-field::placeholder {
+			color: white;
+		}
+
+		.field-group {
+			display: flex;
+			flex-direction: column;
+			gap: 0px;
+			margin-bottom: 10px;
+		}
+
+		.field {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.submit-button {
+			text-align: center;
+		}
+
+		.submit-button button {
+			border: 1px solid black;
+			border-radius: 5px;
+		}
+
+		.card-header {
+			text-align: center;
+			margin-bottom: 5px;
+			font-size: 18px;
+			color: #497bbf;
+			/* Blue color */
+			position: relative;
+		}
+
+		.header-image {
+			position: absolute;
+			top: -42px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 50px;
+			height: auto;
+		}
+
+		#datepicker {
+			height: 40px;
+			/* Adjust the value as needed */
+		}
+
+		.swal-button {
+			padding: 7px 19px;
+			border-radius: 2px;
+			background-color: #4962B3;
+			font-size: 12px;
+			border: 1px solid white;
+			text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+		}
+
+		@media screen and (min-width:760px) and (max-width:990px) {
+			body {
+				background: linear-gradient(to bottom, #05053d 40%, #ffffff 30%);
+			}
+
+			.card-container {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.card-image {
+				width: 600px;
+				height: auto;
+				position: relative;
+				right: 10px;
+				bottom: 140px;
+			}
+
+			.card {
+				width: 650px;
+				height: 600px;
+				padding: 10px;
+				margin-bottom: 120px;
+			}
+
+			.narrow-field,
+			.small-field {
+				width: 300px;
+			}
+
+			.wide-field,
+			.textarea-field {
+				width: 630px;
+			}
+
+			.submit-button button {
+				width: 150px;
+			}
+		}
+
+		@media screen and (max-width:450px) {
+			body {
+				margin: 0;
+				background: linear-gradient(to bottom, #05053d 40%, #ffffff 30%);
+				overflow-x: hidden;
+			}
+
+			.card-container {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				/* gap: 3rem; */
+			}
+
+			.card {
+				width: 350px;
+				height: 600px;
+				padding: 10px;
+				margin-bottom: 50px;
+			}
+
+			.card-image {
+				width: 400px;
+				height: auto;
+				position: relative;
+				right: 0px;
+				bottom: 70px;
+			}
+
+			.narrow-field,
+			.small-field {
+				width: 160px;
+			}
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.13/js/gijgo.min.js"></script>
+	<script>
+		function validateForm() {
+			var firstName = document.forms["visitorForm"]["firstName"].value;
+			var lastName = document.forms["visitorForm"]["lastName"].value;
+			var email = document.forms["visitorForm"]["email"].value;
+			var mobileNumber = document.forms["visitorForm"]["mobileNumber"].value;
+			var dateofbirth = document.forms["visitorForm"]["dateofbirth"].value;
+			var photo = document.forms["visitorForm"]["photo"].value;
+			var remarks = document.forms["visitorForm"]["remarks"].value; // Get remarks field value
+
+			if (firstName === "" || lastName === "" || email === "" || mobileNumber === "" || dateofbirth === "" || photo === "") {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Oops...',
+					text: 'All fields are required.'
+				});
+				return false;
+			}
+
+			var mobileNumberPattern = /^[0-9]{10}$/;
+			if (!mobileNumber.match(mobileNumberPattern)) {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Invalid Mobile Number',
+					text: 'Please enter a valid 10-digit mobile number.'
+				});
+				return false;
+			}
+
+
+
+			var emailPattern = /^[A-Za-z0-9._%+-]+@(gmail\.com|infomericainc\.in)$/;
+			if (!email.match(emailPattern)) {
+				Swal.fire({
+					position: 'top-end',
+					icon: 'error',
+					title: 'Invalid Email Address',
+					text: 'Please enter a valid email address (gmail.com or infomericainc.in).'
+				});
+				return false;
+			}
+
+			return true;
+		}
+
+		$(function () {
+			var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+			$('#datepicker').datepicker({
+				minDate: today,
+				format: 'yyyy-mm-dd'
+			});
+		});
+		function handleFormSubmission(event) {
+			event.preventDefault();
+
+			if (validateForm()) {
+				var form = document.forms["visitorForm"];
+				var formData = new FormData(form);
+
+				fetch('/process', {
+					method: 'POST',
+					body: formData
+				}).then(response => {
+					if (response.ok) {
+						Swal.fire({
+							position: 'top-end',
+							icon: 'success',
+							title: 'Message Sent Successfully',
+							showConfirmButton: false,
+							timer: 1500
+						}).then(() => {
+							form.reset();
+							location.reload();
+						});
+					} else {
+						throw new Error('Message Sent Successfully');
+					}
+				}).catch(error => {
+					Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'We are good To Go',
+						text: 'Message Sent Successfully'
+					}).then(() => {
+						form.reset();
+						location.reload();
+					});
+				});
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+	<img src="/images/Infomerica_PNG Logo.png" alt="Logo" style="width: 150px;
+			height: 100px;">
+	<div class="card-container">
+		<img src="/images/My project.png" alt="Image" class="card-image">
+		<div class="card">
+			<div class="card-header">
+				<img src="https://tse3.mm.bing.net/th?id=OIP.0YVH8RjAETY4BaudcyW08AHaH9&pid=Api&P=0&h=180"
+					alt="Header Image" class="header-image">
+				Welcome to Infomerica
+			</div>
+			<form name="visitorForm" action="/process" method="post" enctype="multipart/form-data"
+				onsubmit="return validateForm();">
+				<div class="field-group">
+					<div class="field">
+						<input type="text" class="input-field narrow-field" name="firstName"
+							placeholder="First Name(As per PAN)">
+						<input type="text" class="input-field narrow-field" name="lastName"
+							placeholder="Last Name(As per PAN)">
+					</div>
+					<div class="field">
+						<input type="email" class="input-field wide-field" name="email" placeholder="Email">
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<input type="text" class="input-field small-field" name="mobileNumber"
+							placeholder="Mobile Number">
+						<input type="text" class="input-field small-field" name="dateofbirth"
+							placeholder="Date of Birth(As per PAN)" onfocus="(this.type='date')">
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<input type="text" class="input-field small-field" name="visitDate" id="datepicker"
+							placeholder="Date of Visiting">
+						<input type="time" class="input-field small-field" name="visitTime" placeholder="Time">
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<select class="input-field small-field" name="purpose">
+							<option value="" selected disabled>Select Purpose</option>
+							<option value="Personal">Personal</option>
+							<option value="Interview">Interview</option>
+							<option value="Meeting">Meeting</option>
+						</select>
+						<select class="input-field small-field" name="visitingBranch">
+							<option value="" selected disabled>Select Visiting Branch</option>
+							<option value="Hyd-HitechCity">Hyd-HitechCity</option>
+							<option value="Hyd-Punjagutta">Hyd-Punjagutta</option>
+							<option value="Banglore">Banglore</option>
+						</select>
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<input type="file" class="input-field small-field" name="photo" accept=".png, .jpg, .jpeg"
+							placeholder="Image to Apply">
+						<select class="input-field small-field" name="WhomToMeet">
+							<option value="" selected disabled>Select Whom to Meet</option>
+							<option value="SaiRam">SaiRam (HR Manager)</option>
+							<option value="Bharath">HemaBharath(Help Desk)</option>
+							<option value="Krupal">Surandher(MD)</option>
+							<option value="Krupal">Krupal(CTO)</option>
+						</select>
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<input type="text" class="textarea-field textarea-field" name="remarks"
+							placeholder="Please Write some Notes">
+					</div>
+				</div>
+
+				<div class="submit-button">
+					<button type="submit" onclick="handleFormSubmission(event)">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

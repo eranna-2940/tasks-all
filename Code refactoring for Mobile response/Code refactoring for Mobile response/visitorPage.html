@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Visitor List</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			padding: 20px;
+			background-color: #f9f9f9;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 30px;
+			color: darkblue;
+		}
+
+		.search-form {
+			margin-top: 20px;
+			text-align: right;
+		}
+
+		.no-visitors {
+			text-align: center;
+			color: #888;
+			font-style: italic;
+			font-weight: bold;
+			margin-top: 20px;
+		}
+
+		.visitor-card {
+			width: 100%;
+			margin-bottom: 30px;
+			border: 1px solid #ddd;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			padding: 15px;
+			transition: transform 0.3s, box-shadow 0.3s;
+			background-color: #fff;
+		}
+
+		.visitor-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 4px 8px #007bff;
+		}
+
+
+		.visitor-image {
+			width: 80px;
+			height: 80px;
+			object-fit: cover;
+			border-radius: 50%;
+			margin: 0 auto 10px;
+			border: 3px solid #fff;
+		}
+
+		.visitor-name {
+			font-size: 18px;
+			margin-top: 10px;
+			color: #333;
+		}
+
+		.visitor-details {
+			margin-top: 10px;
+			color: #666;
+		}
+
+		.visitor-whom-to-meet {
+			color: #666;
+			font-size: 14px;
+		}
+
+		.btn-search {
+			background-color: #007bff;
+			border-color: #007bff;
+		}
+
+		.btn-view-all {
+			background-color: #f0f0f0;
+			border-color: blue;
+		}
+
+		.total-visitors-card {
+			text-align: center;
+			padding: 20px;
+			background-color: #f0f0f0;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			margin-bottom: 20px;
+		}
+
+		.total-visitors {
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		.view-all-section {
+			text-align: right;
+			margin-bottom: 30px;
+		}
+
+		.view-all-btn {
+			font-size: 20px;
+			font-weight: bold;
+			color: black;
+		}
+
+		.logo-image {
+			position: absolute;
+			top: 0.0%;
+			right: 10;
+			
+		}
+		@media screen and (max-width:480px){
+			.header {
+			margin-top: 80px;
+		}
+		.btn-search{
+			width: 100%;
+			margin: 10px 0px 5px 0px;
+		}
+		.view-all-btn{
+			width: 100%;
+		}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1 class="mt-4">Our Visitors</h1>
+		</div>
+		<img src="https://image3.mouthshut.com/images/imagesp/926028931s.jpg" alt="Logo" class="logo-image">
+		<!-- View All Visitors Button -->
+		<div class="view-all-section">
+			<button id="viewAllBtn" class="btn btn-view-all view-all-btn">View All Visitors</button>
+			<div id="totalVisitorsCard" class="total-visitors-card" style="display: none;">
+				Total Visitors: <span class="total-visitors" th:text="${visitorList.size()}"></span>
+			</div>
+		</div>
+
+		<!-- Search Form -->
+		<div class="search-form">
+			<form th:action="@{/getvisitorsByDate}" method="get" class="form-inline justify-content-end">
+				<label for="searchDate" class="mr-2">Search by Date:</label>
+				<input type="date" id="searchDate" name="visitDate" class="form-control mr-2" required>
+				<button type="submit" class="btn btn-primary btn-search">Search</button>
+			</form>
+		</div>
+
+		<!-- No Visitors Message -->
+		<div th:if="${visitorList.isEmpty()}" class="no-visitors">
+			No Visitors Found at this Date.
+		</div>
+
+		<!-- Visitors Cards -->
+		<div class="row">
+			<div th:each="visitor, iterStat : ${visitorList}" class="col-md-4">
+				<div class="visitor-card">
+					<img th:if="${visitor.base64Image}" th:src="@{'data:image/jpeg;base64,' + ${visitor.base64Image}}"
+						alt="Visitor Photo" class="visitor-image" />
+					<div class="visitor-name">
+						<span th:text="${visitor.firstName}"></span> <span th:text="${visitor.lastName}"></span>
+					</div>
+					<div class="visitor-details">
+						<p>Visiting Date: <span th:text="${#dates.format(visitor.visitDate, 'yyyy-MM-dd')}"></span></p>
+						<p>Phone Number: <span th:text="${visitor.mobileNumber}"></span></p>
+						<p>Whom to Meet: <span th:text="${visitor.whomToMeet}"></span></p>
+						<p>Reason: <span th:text="${visitor.purpose}"></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.getElementById("viewAllBtn").addEventListener("click", function () {
+			document.getElementById("viewAllBtn").style.display = "none";
+			document.getElementById("totalVisitorsCard").style.display = "block";
+		});
+	</script>
+</body>
+
+</html>
