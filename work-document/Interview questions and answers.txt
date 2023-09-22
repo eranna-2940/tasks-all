@@ -1,0 +1,375 @@
+//srikanth interview questions:
+
+1. useState hook in react and its purpose.
+
+The React useState Hook allows us to track state in a function component.
+State generally refers to data or properties that need to be tracking in an application
+useState is a react hook which is used to store variable state, it can store the variable state in the form of number, string, object, array, boolean etc.,
+
+2. 1+"2"=? , 4+5=? and how it works?
+
+1+"2" = 12(string) , in javascript anything that is concatenated with the string , the typeof result is always a string.
+4+5 = 9 , the output will be typeof number 9.
+
+3. Example of concatenating two string variables
+
+concat() method is used to combine/add two string variables.
+Ex: s1="hello";
+    s2=" world";
+    console.log(s1.concat(s2)); //output is "hello world"
+
+4. what is promise?
+
+promises are used in asynchronous javascript for better error handling.
+try/catch idiom works very well when you have fully synchronous code, but asynchronous operations render it useless, no errors will be caught. i.e., the function will begin its course while the outer stack runs through and gets to the last line without any errors. If an error occurs at some point in the future inside asynchronous function – nothing will be caught.
+
+When we use Promises, “we’ve lost our error handling”, you might say. That’s right, we don’t need to do anything special here to propagate error because we return a promise and there’s built in support for error flow.
+
+5. what is event loop?
+
+JavaScript uses an event loop to handle asynchronous operations. The event loop is essentially a loop that runs continuously and checks for tasks that are waiting to be executed. These tasks are added to a queue, and the event loop runs through the queue, executing each task in order.
+
+For a detailed explanation visit below link:
+https://www.geeksforgeeks.org/what-is-an-event-loop-in-javascript/
+
+6. what is hoisting in javascript?
+
+In JavaScript, Hoisting is the default behavior of moving all the declarations at the top of the scope before code execution.Basically, it gives us an advantage 
+        that no matter where functions and variables are declared, they are moved to the top of their scope regardless of whether their scope is global or local.
+
+EX: 	// Hoisting
+	function codeHoist(){
+		a = 10;
+		let b = 50;
+	}
+	codeHoist();
+
+	console.log(a); // 10
+	console.log(b); // ReferenceError : b is not defined
+
+7. Difference between var,let,const
+
+var is widely used as a keyword for declaring variables in javascript and it supports hoisting.
+let is used less and it follows strict rules like a variable should be declared first and then initialization is done.
+const is similar to let but the difference is reassignment is not possible to const variable whereas let variable supports. It doesn't support hoisting.
+
+variables must have unique names...... 
+variables have global scope and function scope ....
+let and const keywords provide block scope ..
+var has global scope.....
+
+8. How to derive new array from existing array?
+
+five ways to derive new array from existing array:
+a. using the spread syntax
+   Ex: var arr1 = [1,2,3]
+       var arr2 = [...arr1]
+b. using JSON
+   Ex: var arr1 = [1,2,3]
+       var json = JSON.stringify(arr1)
+       var arr2 = JSON.parse(json)
+c. using slice()
+   Ex: var arr1 = [1,2,3]
+       var arr2 = arr1.slice()
+d. using from()
+   Ex: var arr1 = [1,2,3]
+       var arr2 = Array.from(arr1)
+e. using concat()
+   Ex: var arr1 = [1,2,3]
+       var arr2 = [].concat(arr1)
+
+9. Function vs arrow function
+
+Since regular functions are constructible, they can be called using the new keyword. However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions. Hence, they can never be invoked with the new keyword.
+
+For detailed explanation visit following link:
+https://www.geeksforgeeks.org/difference-between-regular-functions-and-arrow-functions/
+
+10. what is destructuring?
+
+Destructuring Assignment is a JavaScript expression that allows to unpack values from arrays, or properties from objects, into distinct variables data can be extracted from arrays, objects, nested objects and assigning to variables. In Destructuring Assignment on the left-hand side defined that which value should be unpacked from the sourced variable.
+
+Ex: var names = ["alpha", "beta", "gamma", "delta"];
+    var firstName = names[0];
+    var secondName = names[1];
+    console.log(firstName);//"alpha"
+    console.log(secondName);//"beta"
+
+
+//Eranna interview questions:
+
+1. Explain about mediaqueries in css
+
+Media queries are a popular technique for delivering a tailored style sheet to desktops, laptops, tablets, and mobile phones.
+Media queries can be used to check many things, such as:
+a. width and height of the viewport
+b. width and height of the device
+c. orientation (is the tablet/phone in landscape or portrait mode?)
+d. resolution
+
+2. Explain about grid in bootstrap
+
+Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. It allows 12 columns across the page and we can span/combine the columns.
+There are four grid classes : a. xs(for phones - screens less than 768px)
+			      b. sm(for tablets - screens equal to or greater than 768px)
+			      c. md(for small laptops - screens equal to or greater than 992px) 
+			      d. lg(for laptops and desktops - screens equal to or greater than 1200px)
+The above grid classes can be combined to create more dynamic and flexible layouts.
+
+3. How to divide webpage into columns?
+
+using div tag in html.
+
+4. Is it possible to access data from one function to another function.
+
+It is possible to access data from one function to another function i.e., by passing the data. There are four ways to pass data from one funtion to another function:
+a. using a global variable.
+b. by return value.
+c. using local storage/session storage.
+d. using callbacks.
+
+5. Explain about usestate, useEffect, useContext and usecallback hooks
+
+useEffect hook:
+	The useEffect Hook allows you to perform side effects in your components.Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+syntax: useEffect(()=>{
+	  //actual code
+	},[dependencies])
+In the above syntax "dependencies" is optional parameters, if you want the code to be executed once make it empty. If any value is specified in the dependency the code inside the first parameter gets executed whenever the dependency gets changed.
+
+useContext hook:
+	useContext hook is a way to manage state globally.It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.
+
+useCallback hook:
+	The React useCallback Hook returns a memoized callback function. Think of memoization as caching a value so that it does not need to be recalculated. This allows us to isolate resource intensive functions so that they will not automatically run on every render. The useCallback Hook only runs when one of its dependencies update.
+This can improve performance. The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function.
+syntax: useCallback(()=>{
+	  //actual code
+	},[dependencies]);
+
+6. Explain about life cycle methods in class-based components.
+
+React life cycle methods are used in class-based components to manage the state before the introduction of functional components. React life cycle methods can be used to override and execute our code at different phases of the component lifecycle.
+Lifecycle methods can be divided into four main categories :
+a. Mounting (In this phase the component added to the DOM)
+b. Updating (In this phase changes are made to the state or props of the component)
+c. Unmounting (In this phase the component is removed from the DOM)
+d. Error Handling.
+
+7.Differences between css and bootstrap.
+
+CSS represent the style and the appearance of content like font, color, margin, padding, etc. Bootstrap is a free and open-source CSS Framework that is used for developing responsive website. CSS does not have a grid system. Bootstrap is based on-grid system.
+
+
+//Dinesh interview questions
+
+1. What is flex?
+
+The flex property is a shorthand property for:
+a. flex-grow (A number specifying how much the item will grow relative to the rest of the flexible items).
+b. flex-shrink (A number specifying how much the item will shrink relative to the rest of the flexible items).
+c. flex-basis (The length of the item).
+
+syntax: flex: flex-grow flex-shrink flex-basis
+
+2. Differences between flexbox and mediaqueries
+
+Flexbox tells an element how to take up space. Media Query tells you how the content is being viewed.
+Flex box is a layout model. It's a way of laying out elements on the page so that they are flexible in size and orientation. Flexbox has no real basis in print. It is a layout model that was uniquely created for the web, and really only makes sense for the web.
+Media queries allow you apply stylesheets based on properties of a particular medium, as well as the type of medium.
+
+3. Difference between inline and inline-block
+
+Compared to "display: inline", the major difference is that "display: inline-block" allows to set width, height, the top and bottom margins/paddings on the element works, but with display: inline they are not.
+
+Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+
+4. Differences between absolute, relative and fixed 
+
+An element with position: relative; is positioned relative to its normal position.
+Setting the top, right, bottom, and left properties of a relatively-positioned element will cause it to be adjusted away from its normal position. Other content will not be adjusted to fit into any gap left by the element.
+
+An element with position: fixed; is positioned relative to the viewport, which means it always stays in the same place even if the page is scrolled. The top, right, bottom, and left properties are used to position the element.
+
+An element with position: absolute; is positioned relative to the nearest positioned ancestor.
+However if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
+Absolute positioned elements are removed from the normal flow, and can overlap elements.
+
+5. Array methods in Javascript
+
+push, pop, shift, unshift, indexof, lastindexof, includes, splice, slice, concat, filter, map, findindex, findlastindex, etc.,
+
+6. Difference between splice and slice array methods.
+
+splice and slice are array methods which can retrieve a part in the array. The main difference is splice method can add items, remove items and can replace the items in the array and returns a new transformed array, whereas slice returns a copy of the array.
+
+syntax: splice(startindex, number of items to be removed, value1, value2,..)
+syntax: slice(startindex, endindex)
+
+
+//Junaid interview questions
+
+1. Explain map method in reactjs
+
+The map method creates a new array by calling a provided function on every element in the calling array.
+
+syntax: Array.map((item)=>{console.log(item)})
+
+Ex: var numbers = [1, 2, 3, 4, 5];   
+    const doubleValue = numbers.map((number)=>{   
+       return (number * 2);   
+    });   
+    console.log(doubleValue);
+
+2. Expalin react-router-dom
+
+React Router DOM is an npm package that enables you to implement dynamic routing in a web app. It allows you to display pages and allow users to navigate them. It is a fully-featured client and server-side routing library for React.
+React Router Dom is used to build single-page applications i.e. applications that have many pages or components but the page is never refreshed instead the content is dynamically fetched based on the URL. This process is called Routing and it is made possible with the help of React Router Dom.
+
+3. Explain usehistory and useNavigate
+
+The useNavigate() hook is introduced in the React Router v6 to replace the useHistory() hook. In the earlier version, the useHistory() hook accesses the React Router history object and navigates to the other routers using the push or replace methods. It helps to go to the specific URL, forward or backward pages. In the updated version, the React Router’s new navigation API provides a useNavigate() hook which is an imperative version to perform the navigation actions with better compatibility.
+
+4. Explain about fetch and axios
+
+visit the link below:
+https://www.geeksforgeeks.org/difference-between-fetch-and-axios-js-for-making-http-requests/
+
+5. Explain span tag and getElementById.
+
+The <span> tag is an inline container used to mark up a part of a text, or a part of a document. The <span> tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute. The <span> tag is much like the <div> element, but <div> is a block-level element and <span> is an inline element.
+
+The getElementById() method returns an element with a specified value. It returns null if the element does not exist. It is one of the most common methods in the HTML DOM. It is used almost every time you want to read or edit an HTML element.
+
+6. Explain overflow and z-index
+
+The overflow property specifies whether to clip the content or to add scrollbars when the content of an element is too big to fit in the specified area.
+
+The overflow property has the following values:
+a. visible - Default. The overflow is not clipped. The content renders outside the element's box
+b. hidden - The overflow is clipped, and the rest of the content will be invisible
+c. scroll - The overflow is clipped, and a scrollbar is added to see the rest of the content
+d. auto - Similar to scroll, but it adds scrollbars only when necessary
+
+When elements are positioned, they can overlap other elements. The z-index property specifies the stack order of an element (which element should be placed in front of, or behind, the others).
+An element can have a positive or negative stack order.
+
+7. Explain display properties
+
+The display property specifies if/how an element is displayed. Every HTML element has a default display value depending on what type of element it is. The default display value for most elements is block or inline.
+There are some display values which specifies how an element should be displayed, few of them are none, block, inline, inline-block, flex, grid, etc., 
+
+8. Explain how many ways we can write CSS
+
+CSS can be added to HTML documents in 3 ways:
+a. Inline - by using the style attribute inside HTML elements.
+b. Internal - by using a <style> element in the <head> section.
+c. External - by using a <link> element to link to an external CSS file.
+
+9. Explain about PT, rem and !important in css
+
+pt is an absolute length unit. However, it is not recommended for display screens and is widely used in printing materials to precisely define the sizes you need.
+
+rem is a relative length unit the same as em. It is based on the root element's font size. Usually, the default font size in most browsers is 16px. So, if you do not define a root element font size, the default browser font size will be considered the root elements font size. Hence, 16px is equal to 1rem in most cases.
+
+The !important rule in CSS is used to add more importance to a property/value than normal. In fact, if you use the !important rule, it will override ALL previous styling rules for that specific property on that element.
+
+10. Explain margin and padding in css
+
+A margin is the space around an element's border, while padding is the space between an element's border and the element's content. In other words, the margin property controls the space outside an element, and the padding property controls the space inside an element.
+
+11. Explain about container and container-fluid
+
+Containers are used to pad the content inside of them, and there are two container classes available: The .container class provides a responsive fixed width container. The .container-fluid class provides a full width container, spanning the entire width of the viewport.
+
+
+//Mallikarjuna interview questions
+
+1. Explain about css box model
+
+Box model is used when talking about design and layout. The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.
+a. Content - The content of the box, where text and images appear
+b. Padding - Clears an area around the content. The padding is transparent
+c. Border - A border that goes around the padding and content
+d. Margin - Clears an area outside the border. The margin is transparent
+
+2. Difference between visibility hidden and display none
+
+Hiding an element can be done by setting the display property to none. The element will be hidden, and the page will be displayed as if the element is not there.
+
+visibility:hidden; also hides an element. However, the element will still take up the same space as before. The element will be hidden, but still affect the layout.
+
+3. Hexa code colors
+
+A hexadecimal color is specified with: #RRGGBB, where the RR (red), GG (green) and BB (blue) hexadecimal integers specify the components of the color.
+Where rr (red), gg (green) and bb (blue) are hexadecimal values between 00 and ff (same as decimal 0-255).
+Ex:  background-color: #fac09b;
+Sometimes you will see a 3-digit hex code in the CSS source. The 3-digit hex code is a shorthand for some 6-digit hex codes.
+Ex:  background-color: #fc9; /* same as #ffcc99 */
+
+4. padding with four values order
+
+Padding - Clears an area around the content. The padding is transparent
+Ex: padding: 1px 1px 1px 1px (assigns 1px to all sides)
+The four values order is - top, right, bottom, left.
+
+5. Flex and grid in css
+
+Grid is made for a two-dimensional layout while Flexbox is for one dimensional. This means Flexbox can work on either row or columns at a time, but Grids can work on both. Flexbox gives you more flexibility while working on either element (row or column). HTML markup and CSS will be easy to manage in this type of scenario.
+For detailed explanation visit below link:
+https://www.geeksforgeeks.org/comparison-between-css-grid-css-flexbox/
+
+6. what are semantic elements?
+
+A semantic element clearly describes its meaning to both the browser and the developer. 
+Examples of non-semantic elements: <div> and <span> - Tells nothing about its content. 
+Examples of semantic elements: <form> , <table> , and <article> - Clearly defines its content.
+For more detailed explanation visit below link:
+https://www.w3schools.com/html/html5_semantic_elements.asp
+
+7. What is console.log() and how it is used?
+
+The console. log() is a function in JavaScript that is used to print any kind of variables defined before in it or to just print any message that needs to be displayed to the user.
+Ex: console.log("hi"); // displays "hi" in the console
+
+8. What is local storage and session storage?
+
+localStorage and sessionStorage are almost identical and have the same API. The difference is that with sessionStorage , the data is persisted only until the window or tab is closed. With localStorage , the data is persisted until the user manually clears the browser cache or until your web app clears the data.
+For detailed explanation visit below link:
+https://www.digitalocean.com/community/tutorials/js-introduction-localstorage-sessionstorage
+
+9. Events
+
+An HTML event can be something the browser does, or something a user does.
+Here are some examples of HTML events:
+a. An HTML web page has finished loading
+b. An HTML input field was changed
+c. An HTML button was clicked
+Often, when events happen, you may want to do something. JavaScript lets you execute code when events are detected. HTML allows event handler attributes, with JavaScript code, to be added to HTML elements.
+Here is a list of some common HTML events:
+a. onchange - An HTML element has been changed
+b. onclick - The user clicks an HTML element
+c. onmouseover - The user moves the mouse over an HTML element
+d. onmouseout - The user moves the mouse away from an HTML element
+e. onkeydown - The user pushes a keyboard key
+f. onload - The browser has finished loading the page
+
+10. How to create table and which tags are used
+
+A table in HTML consists of table cells inside rows and columns.
+Each table cell is defined by a <td> and a </td> tag. td stands for table data. Everything between <td> and </td> are the content of the table cell.
+Each table row starts with a <tr> and ends with a </tr> tag. tr stands for table row.
+Sometimes you want your cells to be table header cells. In those cases use the <th> tag instead of the <td> tag. th stands for table header. By default, the text in <th> elements are bold and centered, but you can change that with CSS.
+
+11. What is meta and state it's purpose?
+
+The <meta> tag defines metadata about an HTML document. Metadata is data (information) about data.
+<meta> tags always go inside the <head> element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings.
+Metadata will not be displayed on the page, but is machine parsable. Metadata is used by browsers (how to display content or reload page), search engines (keywords), and other web services.
+
+12. Class and function components in reactJs
+
+A functional component is just a plain JavaScript pure function that accepts props as an argument and returns a React element(JSX). A class component requires you to extend from React. Component and create a render function that returns a React element. There is no render method used in functional components.
+
+visit the below link:
+https://www.geeksforgeeks.org/differences-between-functional-components-and-class-components/

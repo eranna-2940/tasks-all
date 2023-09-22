@@ -1,0 +1,37 @@
+1. What Is the “This” Keyword in JavaScript?
+A This allows you to refer to the object which was used to make the function call.
+2. What Is a Constructor in JavaScript?
+A constructor is used to create an object instance of a class. To call the constructor, you use the new keyword.
+3. List the 7 Error Types in JavaScript.
+EvalError: Error regarding the global function eval()
+InternalError: Internal error in the JS engine (stack overflow, etc)
+RangeError: Numeric variable or parameter is outside of valid range
+ReferenceError: Invalid variable reference
+SyntaxError: Syntax error while parsing code in eval()
+TypeError: Parameter or variable not of a valid type
+URIError: Invalid parameters passed to decodeURI() or encodeURI()
+let res = [1,2,2,2,3,3,4, 4];
+
+
+let unique = []
+
+
+for(let i=0;i<res.length;i++){
+    if(!unique.includes(res[i])){
+        unique.push(res[i])
+    }
+}
+
+
+console.log(unique)
+
+
+what is store in redux?
+Redux has a feature called ‘Store’ which allows you to save the application’s entire State at one place. Therefore all it’s component’s State are stored in the Store so that you will get regular updates directly from the Store. The single state tree helps you to keep track of changes over time and debug or inspect the application.
+
+what is action in redux?
+It is a function which returns an action object. The action-type and the action data are always stored in the action object. Actions can send data between the Store and the software application. All information retrieved by the Store is produced by the actions.
+
+Explain pure components in React js
+Pure components are the fastest components which can replace any component with only a render(). It helps you to enhance the simplicity of the code and performance of the application.
+
